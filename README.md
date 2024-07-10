@@ -1,6 +1,9 @@
 ## nerdbord-project-challenge
 Repository for bi-weekly project challenge.
 
+### 
+cd ai-blog to enter project's directory then npm run dev to run Sanity Studio
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
