@@ -13,6 +13,9 @@
     "typegen": "sanity schema extract && sanity typegen generate"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
     "@sanity/assist": "^3.0.4",
     "@sanity/icons": "^3.0.0",
     "@sanity/image-url": "^1.0.2",
@@ -24,18 +27,26 @@
     "@types/react-dom": "^18.3.0",
     "@vercel/speed-insights": "^1.0.11",
     "autoprefixer": "^10.4.19",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "lucide-react": "^0.408.0",
     "next": "^14.2.3",
     "next-sanity": "^9.3.10",
     "postcss": "^8.4.38",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.52.1",
+    "react-wrap-balancer": "^1.1.1",
     "sanity": "^3.44.0",
     "sanity-plugin-asset-source-unsplash": "^3.0.1",
     "server-only": "^0.0.1",
     "styled-components": "^6.1.11",
+    "tailwind-merge": "^2.4.0",
     "tailwindcss": "^3.4.3",
-    "typescript": "5.4.5"
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "5.4.5",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "eslint": "^8.57.0",

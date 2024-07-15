@@ -78,7 +78,6 @@ async function Footer() {
               Built with Next.js.
             </h3>
             <div className="flex flex-col items-center justify-center lg:w-1/2 lg:flex-row lg:pl-4">
-              <SubscribeForm />
               <a
                 href="https://github.com/vercel/next.js/tree/canary/examples/cms-sanity"
                 className="mx-3 font-bold hover:underline"
@@ -104,6 +103,7 @@ export default function RootLayout({
         <section className="min-h-screen">
           {draftMode().isEnabled && <AlertBanner />}
           <main>{children}</main>
+          <SubscribeForm />
           <Suspense>
             <Footer />
           </Suspense>
