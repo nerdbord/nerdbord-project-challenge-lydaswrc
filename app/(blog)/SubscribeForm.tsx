@@ -2,44 +2,6 @@
 
 import { useState } from "react";
 import { subscribe } from "@/app/(blog)/actions";
-
-// export const SubscribeForm = () => {
-//   const [email, setEmail] = useState("");
-//   const [message, setMessage] = useState("");
-
-//   const handleSubmit = async (e: React.FormEvent) => {
-//     e.preventDefault();
-
-//       const result = await subscribe(email);
-//       console.log("result", result.message);
-//       setMessage(result.message);
-
-//       if (result.success) {
-//         setEmail("");
-//       }
-
-//   };
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//         <input
-//           type="email"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//           placeholder="Enter your email"
-//           required
-
-//         />
-//         <button type="submit" >
-//           Subscribe
-//         </button>
-//       </form>
-//       {message && <p>{message}</p>}
-//     </div>
-//   );
-// };
-
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -84,7 +46,7 @@ export const SubscribeForm = () => {
     setMessage(result.message);
 
     if (result.success) {
-      form.reset({email: ""});
+      form.reset({ email: "" });
     }
   };
 
@@ -115,7 +77,9 @@ export const SubscribeForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>{message && <p>{message}</p>}</FormDescription>
+                  <FormDescription>
+                    {message && <p>{message}</p>}
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -123,7 +87,6 @@ export const SubscribeForm = () => {
             <Button type="submit">Subskrybuj</Button>
           </form>
         </Form>
-        
       </Container>
     </Section>
   );
