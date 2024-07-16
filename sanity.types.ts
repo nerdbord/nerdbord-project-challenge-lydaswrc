@@ -603,6 +603,16 @@ export type AuthorsQueryResult = Array<{
   _id: string;
   name: string | null;
 }>;
+// Variable: userIsSubscribed
+// Query:  * [_type == "subscriber" && email == $email][0]
+export type UserIsSubscribedResult = {
+  _id: string;
+  _type: "subscriber";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  email?: string;
+} | null;
 // Source: ./app/(blog)/posts/[slug]/page.tsx
 // Variable: postSlugs
 // Query: *[_type == "post"]{slug}

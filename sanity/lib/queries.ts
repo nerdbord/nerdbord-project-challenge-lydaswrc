@@ -28,3 +28,5 @@ export const postQuery = groq`*[_type == "post" && slug.current == $slug] [0] {
 }`;
 
 export const authorsQuery = groq`*[_type == "author"]{_id, name}`;
+
+export const userIsSubscribed = groq` * [_type == "subscriber" && email == $email][0]`;
