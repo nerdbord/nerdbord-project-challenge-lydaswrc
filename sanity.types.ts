@@ -588,6 +588,12 @@ export type PostQueryResult = {
     } | null;
   } | null;
 } | null;
+// Variable: authorsQuery
+// Query: *[_type == "author"]{_id, name}
+export type AuthorsQueryResult = Array<{
+  _id: string;
+  name: string | null;
+}>;
 // Source: ./app/(blog)/posts/[slug]/page.tsx
 // Variable: postSlugs
 // Query: *[_type == "post"]{slug}

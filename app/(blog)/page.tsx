@@ -8,11 +8,11 @@ import MoreStories from "./more-stories";
 import Onboarding from "./onboarding";
 import PortableText from "./portable-text";
 
-import type { HeroQueryResult, SettingsQueryResult } from "@/sanity.types";
+import { type HeroQueryResult, type SettingsQueryResult } from "@/sanity.types";
 import * as demo from "@/sanity/lib/demo";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { heroQuery, settingsQuery } from "@/sanity/lib/queries";
-import { getNotifications } from "./actions";
+import { getNotifications, uploadBlogPost } from "./actions";
 
 function Intro(props: { title: string | null | undefined; description: any }) {
   const title = props.title || demo.title;
@@ -100,6 +100,20 @@ export default async function Page() {
           get notifications
         </button>
       </form>
+      <form
+        action={async () => {
+          "use server";
+          uploadBlogPost();
+        }}
+      >
+        <button
+          className="bg-black text-white p-4 m-4 hover:bg-slate-800"
+          type="submit"
+        >
+          add post
+        </button>
+      </form>
+
       {heroPost ? (
         <HeroPost
           title={heroPost.title}
