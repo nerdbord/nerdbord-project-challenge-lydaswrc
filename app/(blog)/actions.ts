@@ -4,10 +4,14 @@ import { draftMode } from "next/headers";
 import { generateObject } from "ai";
 import { z } from "zod";
 import { openai } from "@/openai.config";
-import { AuthorsQueryResult, Post } from "@/sanity.types";
-import { createPost } from "@/sanity/lib/mutations";
+import {
+  AuthorsQueryResult,
+  Post,
+  UserIsSubscribedResult,
+} from "@/sanity.types";
+import { createPost, createSubscriber } from "@/sanity/lib/mutations";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { authorsQuery } from "@/sanity/lib/queries";
+import { authorsQuery, userIsSubscribed } from "@/sanity/lib/queries";
 
 export async function disableDraftMode() {
   "use server";
@@ -87,4 +91,27 @@ export const uploadBlogPost = async () => {
   const result = await createPost(payload);
   console.log(result);
   return result;
+};
+
+export const subscribe = async (email: string) => {
+  const isSubscribed = await sanityFetch<UserIsSubscribedResult>({
+    query: userIsSubscribed,
+    params: { email },
+  });
+
+  console.log(isSubscribed);
+
+  if (isSubscribed) {
+    return { success: false, message: "This email already is subscribed." };
+  }
+  try {
+    await createSubscriber(email);
+    return { success: true, message: "You are subscribed successfully!" };
+  } catch (error) {
+    console.error("Error while creating subscriber", error);
+    return {
+      success: false,
+      message: "Failed to subscribe. Please try again.",
+    };
+  }
 };
