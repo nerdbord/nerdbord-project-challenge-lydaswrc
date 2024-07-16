@@ -26,3 +26,5 @@ export const postQuery = groq`*[_type == "post" && slug.current == $slug] [0] {
   content,
   ${postFields}
 }`;
+
+export const authorsQuery = groq`*[_type == "author"]{_id, name}`;
