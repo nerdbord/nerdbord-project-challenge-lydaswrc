@@ -10,7 +10,6 @@ export const client = createClient({
   apiVersion,
   useCdn: true,
   perspective: "published",
-  token: process.env.SANITY_API_EDIT_TOKEN,
   stega: {
     studioUrl,
     logger: console,
