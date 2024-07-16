@@ -4,6 +4,10 @@ import { draftMode } from "next/headers";
 import { generateObject } from "ai";
 import { z } from "zod";
 import { openai } from "@/openai.config";
+import { AuthorsQueryResult, Post } from "@/sanity.types";
+import { createPost } from "@/sanity/lib/mutations";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { authorsQuery } from "@/sanity/lib/queries";
 
 export async function disableDraftMode() {
   "use server";
@@ -34,3 +38,53 @@ export async function getNotifications(input: string) {
 
   return { notifications };
 }
+
+export const uploadBlogPost = async () => {
+  const createdAt = new Date().toISOString();
+  const authors = await sanityFetch<AuthorsQueryResult>({
+    query: authorsQuery,
+  });
+
+  const payload: Post = {
+    _id: "GPTpost.",
+    _createdAt: createdAt,
+    _updatedAt: createdAt,
+    _rev: "",
+    _type: "post",
+    title: "Sample Post Title",
+    slug: {
+      _type: "slug",
+      current: "sample-post-title",
+    },
+    content: [
+      {
+        _key: "hh",
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "This is the content of the sample post.",
+            _key: "sdf",
+          },
+        ],
+      },
+    ],
+    excerpt: "This is a short excerpt of the post.",
+    coverImage: {
+      _type: "image",
+      asset: {
+        _type: "reference",
+        _ref: "image-cc4dd1d3a6284bb0e2905bc667eaa67517a5a080-5121x3838-jpg", // This should be the reference to the uploaded image asset
+      },
+      alt: "An example cover image",
+    },
+    date: createdAt,
+    author: {
+      _type: "reference",
+      _ref: authors[0]._id, // This should be the reference to the author document
+    },
+  };
+  const result = await createPost(payload);
+  console.log(result);
+  return result;
+};
