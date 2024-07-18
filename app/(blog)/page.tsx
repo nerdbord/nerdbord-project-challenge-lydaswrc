@@ -87,7 +87,7 @@ export default async function Page() {
 
   return (
     <Container>
-      <div className="container mx-auto px-5">
+      <div className="container px-5">
         <Intro title={settings?.title} description={settings?.description} />
         {/* <Intro title={settings?.title} description={settings?.description} /> */}
         {/* <form
