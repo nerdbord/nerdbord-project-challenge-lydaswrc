@@ -8,11 +8,19 @@ import MoreStories from "./more-stories";
 import Onboarding from "./onboarding";
 import PortableText from "./portable-text";
 
-import { type HeroQueryResult, type SettingsQueryResult } from "@/sanity.types";
+import {
+  PostTitlesQueryResult,
+  type HeroQueryResult,
+  type SettingsQueryResult,
+} from "@/sanity.types";
 import * as demo from "@/sanity/lib/demo";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { heroQuery, settingsQuery } from "@/sanity/lib/queries";
-import { getNotifications, uploadBlogPost } from "./actions";
+import {
+  heroQuery,
+  postTitlesQuery,
+  settingsQuery,
+} from "@/sanity/lib/queries";
+import { uploadAIBlogPost } from "./actions";
 
 function Intro(props: { title: string | null | undefined; description: any }) {
   const title = props.title || demo.title;
@@ -75,42 +83,32 @@ function HeroPost({
 }
 
 export default async function Page() {
-  const [settings, heroPost] = await Promise.all([
+  const [settings, heroPost, postTitles] = await Promise.all([
     sanityFetch<SettingsQueryResult>({
       query: settingsQuery,
     }),
     sanityFetch<HeroQueryResult>({ query: heroQuery }),
+    sanityFetch<PostTitlesQueryResult>({ query: postTitlesQuery }),
   ]);
 
+  console.log(
+    postTitles.map((post, index) => `${index + 1}. ${post.title}`).join(", ")
+  );
   return (
     <div className="container mx-auto px-5">
       <Intro title={settings?.title} description={settings?.description} />
+
       <form
         action={async () => {
           "use server";
-          getNotifications(
-            "You generate three notifications for a messages app."
-          );
+          uploadAIBlogPost();
         }}
       >
         <button
           className="bg-black text-white p-4 m-4 hover:bg-slate-800"
           type="submit"
         >
-          get notifications
-        </button>
-      </form>
-      <form
-        action={async () => {
-          "use server";
-          uploadBlogPost();
-        }}
-      >
-        <button
-          className="bg-black text-white p-4 m-4 hover:bg-slate-800"
-          type="submit"
-        >
-          add post
+          Generate random post!
         </button>
       </form>
 

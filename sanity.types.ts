@@ -613,6 +613,11 @@ export type UserIsSubscribedResult = {
   _rev: string;
   email?: string;
 } | null;
+// Variable: postTitlesQuery
+// Query: *[_type == "post"]{title}
+export type PostTitlesQueryResult = Array<{
+  title: string | null;
+}>;
 // Source: ./app/(blog)/posts/[slug]/page.tsx
 // Variable: postSlugs
 // Query: *[_type == "post"]{slug}
