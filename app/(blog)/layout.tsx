@@ -25,6 +25,7 @@ import { Container, Layout, Main, Section } from "@/components/craft";
 import settings from "@/sanity/schemas/singletons/settings";
 
 import Balancer from "react-wrap-balancer";
+import { Header } from "./Header";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch<SettingsQueryResult>({
@@ -109,7 +110,7 @@ export default function RootLayout({
       <html lang="en" className={`${inter.variable} bg-white text-black`}>
         <body>
           <section className="min-h-screen">
-            {draftMode().isEnabled && <AlertBanner />}
+            <Header />
             <Main>{children}</Main>
             <SubscribeForm />
             <Suspense>
