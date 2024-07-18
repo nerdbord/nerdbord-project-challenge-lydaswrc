@@ -2,16 +2,10 @@
 
 import { Container } from "@/components/craft";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/posts", label: "Posts" },
-];
+const navLinks = [{ href: "/", label: "Home" }];
 
 export const Header = () => {
-  const pathname = usePathname();
-
   return (
     <Container>
       <header className="flex justify-between items-center py-4 px-7 border-b">
@@ -20,20 +14,8 @@ export const Header = () => {
             HHH
           </span>
         </Link>
-        <nav>
-          <ul className="flex gap-x-5 text-[14px]">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`${pathname === link.href ? "text-slate-900" : "text-slate-400"}`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+
+        <span className="text-slate-900 text-[14px]">Have a nice day 😺</span>
       </header>
     </Container>
   );

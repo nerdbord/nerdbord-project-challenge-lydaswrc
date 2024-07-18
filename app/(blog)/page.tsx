@@ -6,36 +6,14 @@ import CoverImage from "./cover-image";
 import DateComponent from "./date";
 import MoreStories from "./more-stories";
 import Onboarding from "./onboarding";
-import PortableText from "./portable-text";
 
 import { type HeroQueryResult, type SettingsQueryResult } from "@/sanity.types";
-import * as demo from "@/sanity/lib/demo";
+
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { heroQuery, settingsQuery } from "@/sanity/lib/queries";
-import { getNotifications, uploadBlogPost } from "./actions";
 
 import { Intro } from "./Intro";
 import { Container, Section, Article } from "@/components/craft";
-
-// function Intro(props: { title: string | null | undefined; description: any }) {
-//   const title = props.title || demo.title;
-//   const description = props.description?.length
-//     ? props.description
-//     : demo.description;
-//   return (
-//     <section className="mt-16 mb-16 flex flex-col items-center lg:mb-12 lg:flex-row lg:justify-between">
-//       <h1 className="text-balance text-6xl font-bold leading-tight tracking-tighter lg:pr-8 lg:text-8xl">
-//         {title || demo.title}
-//       </h1>
-//       <h2 className="text-pretty mt-5 text-center text-lg lg:pl-8 lg:text-left">
-//         <PortableText
-//           className="prose-lg"
-//           value={description?.length ? description : demo.description}
-//         />
-//       </h2>
-//     </section>
-//   );
-// }
 
 function HeroPost({
   title,
@@ -89,35 +67,6 @@ export default async function Page() {
     <Container>
       <div className="container px-5">
         <Intro title={settings?.title} description={settings?.description} />
-        {/* <Intro title={settings?.title} description={settings?.description} /> */}
-        {/* <form
-        action={async () => {
-          "use server";
-          getNotifications(
-            "You generate three notifications for a messages app."
-          );
-        }}
-      >
-        <button
-          className="bg-black text-white p-4 m-4 hover:bg-slate-800"
-          type="submit"
-        >
-          get notifications
-        </button>
-      </form>
-      <form
-        action={async () => {
-          "use server";
-          uploadBlogPost();
-        }}
-      >
-        <button
-          className="bg-black text-white p-4 m-4 hover:bg-slate-800"
-          type="submit"
-        >
-          add post
-        </button>
-      </form> */}
 
         {heroPost ? (
           <HeroPost
