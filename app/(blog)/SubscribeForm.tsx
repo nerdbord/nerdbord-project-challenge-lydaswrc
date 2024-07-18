@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Balancer from "react-wrap-balancer";
 
-import { Section, Container } from "@/components/craft";
+import { Section, Container, Article } from "@/components/craft";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -51,7 +51,7 @@ export const SubscribeForm = () => {
   };
 
   return (
-    <Section>
+    <Section className="px-1 md:px-7 lg:px-12 xl:px-15">
       <Container className="space-y-8">
         <h2 className="!my-0">Stay in touch!</h2>
         <p className="text-lg opacity-70 md:text-2xl">

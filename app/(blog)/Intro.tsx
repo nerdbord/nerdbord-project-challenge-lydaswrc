@@ -17,8 +17,8 @@ export const Intro = (props: {
     ? props.description
     : demo.description;
   return (
-    <Section>
-      <Container className="flex flex-col">
+   <Section>
+      {/* <Container className="flex flex-col"> */}
         <h1 className="!mb-0">
           {title || demo.title}
         </h1>
@@ -61,7 +61,7 @@ export const Intro = (props: {
             </Button>
           </form>
         </div>
-      </Container>
+      {/* </Container> */}
     </Section>
   );
 };

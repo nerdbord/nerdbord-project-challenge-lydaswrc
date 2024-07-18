@@ -103,7 +103,7 @@ export default function RootLayout({
     <Layout>
       <html lang="en" className={`${inter.variable} bg-white text-black`}>
         <body>
-          <section className="min-h-screen">
+          <section className="min-h-screen px-5">
             <Header />
             <Main>{children}</Main>
             <SubscribeForm />

@@ -64,8 +64,8 @@ export default async function Page() {
   ]);
 
   return (
-    <Container>
-      <div className="container px-5">
+    <Section>
+      <Container>
         <Intro title={settings?.title} description={settings?.description} />
 
         {heroPost ? (
@@ -90,7 +90,7 @@ export default async function Page() {
             </Suspense>
           </Article>
         )}
-      </div>
-    </Container>
+      </Container>
+    </Section>
   );
 }
