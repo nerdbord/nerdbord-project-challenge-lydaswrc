@@ -16,7 +16,9 @@ export const Header = () => {
     <Container>
       <header className="flex justify-between items-center py-4 px-7 border-b">
         <Link href="/">
-          <span>HHH</span>
+          <span className="bg-slate-800 text-slate-50 shadow-md font-bold p-2 rounded-full hover:bg-slate-500">
+            HHH
+          </span>
         </Link>
         <nav>
           <ul className="flex gap-x-5 text-[14px]">
