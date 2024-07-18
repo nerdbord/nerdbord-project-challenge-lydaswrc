@@ -31,8 +31,6 @@ export const Intro = (props: {
           </Balancer>
         </h3>
         <div className="!mt-8 flex items-center gap-2">
-          {/* <Button>Get Started</Button>
-          <Button variant={"outline"}>Learn More</Button> */}
           <form
             action={async () => {
               "use server";

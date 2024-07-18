@@ -3,8 +3,6 @@
 import { Container } from "@/components/craft";
 import Link from "next/link";
 
-const navLinks = [{ href: "/", label: "Home" }];
-
 export const Header = () => {
   return (
     <Container>
