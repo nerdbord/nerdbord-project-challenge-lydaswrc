@@ -7,10 +7,17 @@ import DateComponent from "./date";
 import MoreStories from "./more-stories";
 import Onboarding from "./onboarding";
 
-import { type HeroQueryResult, type SettingsQueryResult } from "@/sanity.types";
-
+import {
+  PostTitlesQueryResult,
+  type HeroQueryResult,
+  type SettingsQueryResult,
+} from "@/sanity.types";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { heroQuery, settingsQuery } from "@/sanity/lib/queries";
+import {
+  heroQuery,
+  postTitlesQuery,
+  settingsQuery,
+} from "@/sanity/lib/queries";
 
 import { Intro } from "./Intro";
 import { Container, Section, Article } from "@/components/craft";
@@ -56,13 +63,17 @@ function HeroPost({
 }
 
 export default async function Page() {
-  const [settings, heroPost] = await Promise.all([
+  const [settings, heroPost, postTitles] = await Promise.all([
     sanityFetch<SettingsQueryResult>({
       query: settingsQuery,
     }),
     sanityFetch<HeroQueryResult>({ query: heroQuery }),
+    sanityFetch<PostTitlesQueryResult>({ query: postTitlesQuery }),
   ]);
 
+  console.log(
+    postTitles.map((post, index) => `${index + 1}. ${post.title}`).join(", ")
+  );
   return (
     <Section>
       <Container>

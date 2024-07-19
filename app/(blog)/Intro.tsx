@@ -6,7 +6,7 @@ import { Container, Section } from "@/components/craft";
 import { Button } from "@/components/ui/button";
 import * as demo from "@/sanity/lib/demo";
 import PortableText from "./portable-text";
-import { getNotifications, uploadBlogPost } from "./actions";
+import { uploadAIBlogPost } from "./actions";
 
 export const Intro = (props: {
   title: string | null | undefined;
@@ -17,50 +17,33 @@ export const Intro = (props: {
     ? props.description
     : demo.description;
   return (
-   <Section>
+    <Section>
       {/* <Container className="flex flex-col"> */}
-        <h1 className="!mb-0">
-          {title || demo.title}
-        </h1>
-        <h3 className="mt-2 text-muted-foreground">
-          <Balancer>
-            <PortableText
-              className="prose-lg"
-              value={description?.length ? description : demo.description}
-            />
-          </Balancer>
-        </h3>
-        <div className="!mt-8 flex items-center gap-2">
-          <form
-            action={async () => {
-              "use server";
-              getNotifications(
-                "You generate three notifications for a messages app."
-              );
-            }}
+      <h1 className="!mb-0">{title || demo.title}</h1>
+      <h3 className="mt-2 text-muted-foreground">
+        <Balancer>
+          <PortableText
+            className="prose-lg"
+            value={description?.length ? description : demo.description}
+          />
+        </Balancer>
+      </h3>
+      <div className="!mt-8 flex items-center gap-2">
+        <form
+          action={async () => {
+            "use server";
+            uploadAIBlogPost();
+          }}
+        >
+          <Button
+            variant={"default"}
+            //   className="bg-black text-white p-4 m-4 hover:bg-slate-800"
+            type="submit"
           >
-            <Button
-              //   className="bg-black text-white p-4 m-4 hover:bg-slate-800"
-              type="submit"
-            >
-              get notifications
-            </Button>
-          </form>
-          <form
-            action={async () => {
-              "use server";
-              uploadBlogPost();
-            }}
-          >
-            <Button
-              variant={"outline"}
-              //   className="bg-black text-white p-4 m-4 hover:bg-slate-800"
-              type="submit"
-            >
-              add post
-            </Button>
-          </form>
-        </div>
+            Generate random post!
+          </Button>
+        </form>
+      </div>
       {/* </Container> */}
     </Section>
   );
