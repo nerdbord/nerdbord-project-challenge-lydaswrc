@@ -51,6 +51,45 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "subscription",
+      description: "Write here the title of subscription",
+      title: "Subscription title",
+      type: "string",
+    }),
+    defineField({
+      name: "subscriptionContent",
+      description: "Subscription content goes here.",
+      title: "Subscription content",
+      type: "array",
+      initialValue: demo.description,
+      of: [
+        defineArrayMember({
+          type: "block",
+          options: {},
+          styles: [],
+          lists: [],
+          marks: {
+            decorators: [],
+            annotations: [
+              defineField({
+                type: "object",
+                name: "link",
+                fields: [
+                  {
+                    type: "string",
+                    name: "href",
+                    title: "URL",
+                    validation: (rule) => rule.required(),
+                  },
+                ],
+              }),
+            ],
+          },
+        }),
+      ],
+    }),
+
+    defineField({
       name: "footer",
       description:
         "This is a block of text that will be displayed at the bottom of the page.",

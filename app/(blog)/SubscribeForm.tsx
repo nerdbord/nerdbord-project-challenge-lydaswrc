@@ -19,6 +19,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import PortableText from "./portable-text";
+
+type SubscriptionFormProps = {
+  subscription: string;
+  subscriptionContent: any;
+};
 
 const formSchema = z.object({
   email: z.string().email({
@@ -26,7 +32,7 @@ const formSchema = z.object({
   }),
 });
 
-export const SubscribeForm = () => {
+export const SubscribeForm: React.FC<SubscriptionFormProps> = ({ subscription, subscriptionContent }) => {
   const [message, setMessage] = useState<string>("");
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,19 +55,22 @@ export const SubscribeForm = () => {
       form.reset({ email: "" });
     }
   };
+  // const subscriptionTitle = props.subscription;
+  // const subscriptionDescription = props.subscriptionContent?.length;
+   
+  // h2: Stay in touch!
+  // p: You are invited to share your email address to receive the latest
+  //  updates on life transformation, health, and wellness. We offer
+  // various ways to improve your life and health, which can help you
+  // achieve greater satisfaction and efficiency.
 
   return (
     <Section className="px-1 md:px-7 lg:px-12 xl:px-15">
       <Container className="space-y-8">
-        <h2 className="!my-0">Stay in touch!</h2>
-        <p className="text-lg opacity-70 md:text-2xl">
-          <Balancer>
-            You are invited to share your email address to receive the latest
-            updates on life transformation, health, and wellness. We offer
-            various ways to improve your life and health, which can help you
-            achieve greater satisfaction and efficiency.
-          </Balancer>
-        </p>
+      <h2 className="!my-0">{subscription}</h2>
+      <p className="text-lg opacity-70 md:text-2xl">
+        <Balancer><PortableText value={subscriptionContent} /></Balancer>
+      </p>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField

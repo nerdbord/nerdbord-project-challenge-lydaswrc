@@ -177,6 +177,25 @@ export type Settings = {
     _type: "block";
     _key: string;
   }>;
+  subscription?: string;
+  subscriptionContent?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   footer?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -392,15 +411,10 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]
+// Query: *[_type == "settings"][0]{  title,  description,  subscription,  subscriptionContent,  footer,  ogImage}
 export type SettingsQueryResult = {
-  _id: string;
-  _type: "settings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  description?: Array<{
+  title: string | null;
+  description: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -417,8 +431,27 @@ export type SettingsQueryResult = {
     level?: number;
     _type: "block";
     _key: string;
-  }>;
-  footer?: Array<{
+  }> | null;
+  subscription: string | null;
+  subscriptionContent: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  footer: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -435,8 +468,8 @@ export type SettingsQueryResult = {
     level?: number;
     _type: "block";
     _key: string;
-  }>;
-  ogImage?: {
+  }> | null;
+  ogImage: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -448,7 +481,7 @@ export type SettingsQueryResult = {
     alt?: string;
     metadataBase?: string;
     _type: "image";
-  };
+  } | null;
 } | null;
 // Variable: heroQuery
 // Query: *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) [0] {  content,    _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{"name": coalesce(name, "Anonymous"), picture},}
@@ -612,6 +645,29 @@ export type UserIsSubscribedResult = {
   _updatedAt: string;
   _rev: string;
   email?: string;
+} | null;
+// Variable: subscriptionDataQuery
+// Query: *[_type == "settings"][0]{subscription, subscriptionContent}
+export type SubscriptionDataQueryResult = {
+  subscription: string | null;
+  subscriptionContent: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
 } | null;
 // Source: ./app/(blog)/posts/[slug]/page.tsx
 // Variable: postSlugs

@@ -2,7 +2,7 @@
 import Balancer from "react-wrap-balancer";
 
 // Local component imports
-import { Container, Section } from "@/components/craft";
+import { Section } from "@/components/craft";
 import { Button } from "@/components/ui/button";
 import * as demo from "@/sanity/lib/demo";
 import PortableText from "./portable-text";
@@ -18,7 +18,6 @@ export const Intro = (props: {
     : demo.description;
   return (
    <Section>
-      {/* <Container className="flex flex-col"> */}
         <h1 className="!mb-0">
           {title || demo.title}
         </h1>

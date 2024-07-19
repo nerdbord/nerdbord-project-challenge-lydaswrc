@@ -1,7 +1,7 @@
 import "../globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
+import type { GetServerSideProps, Metadata } from "next";
 import {
   VisualEditing,
   toPlainText,
@@ -22,6 +22,8 @@ import { SubscribeForm } from "./SubscribeForm";
 import { Container, Layout, Main, Section } from "@/components/craft";
 
 import { Header } from "./Header";
+import settings from "@/sanity/schemas/singletons/settings";
+
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch<SettingsQueryResult>({
@@ -31,6 +33,8 @@ export async function generateMetadata(): Promise<Metadata> {
   });
   const title = settings?.title || demo.title;
   const description = settings?.description || demo.description;
+  const subscription = settings?.subscription
+  const subscriptionContent = settings?.subscriptionContent;
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage);
   let metadataBase: URL | undefined = undefined;
@@ -99,6 +103,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+  
   return (
     <Layout>
       <html lang="en" className={`${inter.variable} bg-white text-black`}>
@@ -106,7 +112,9 @@ export default function RootLayout({
           <section className="min-h-screen px-5">
             <Header />
             <Main>{children}</Main>
-            <SubscribeForm />
+            {settings && (
+              <SubscribeForm subscription={settings?.subscription} subscriptionContent={settings?.subscriptionContent} />
+            )}
             <Suspense>
               <Footer />
             </Suspense>

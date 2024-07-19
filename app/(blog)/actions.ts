@@ -7,11 +7,17 @@ import { openai } from "@/openai.config";
 import {
   AuthorsQueryResult,
   Post,
+  SettingsQueryResult,
   UserIsSubscribedResult,
 } from "@/sanity.types";
 import { createPost, createSubscriber } from "@/sanity/lib/mutations";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { authorsQuery, userIsSubscribed } from "@/sanity/lib/queries";
+import {
+  authorsQuery,
+  userIsSubscribed,
+  subscriptionDataQuery,
+} from "@/sanity/lib/queries";
+import { client } from "@/sanity/lib/client";
 
 export async function disableDraftMode() {
   "use server";
@@ -114,4 +120,10 @@ export const subscribe = async (email: string) => {
       message: "Failed to subscribe. Please try again.",
     };
   }
+};
+
+export const uploadSubscriptionData = async () => {
+  const query = `*[_type == "settings"][0]{subscription, subscriptionContent}`;
+  const result = await client.fetch(query);
+  return result
 };

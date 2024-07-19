@@ -1,6 +1,13 @@
 import { groq } from "next-sanity";
 
-export const settingsQuery = groq`*[_type == "settings"][0]`;
+export const settingsQuery = groq`*[_type == "settings"][0]{
+  title,
+  description,
+  subscription,
+  subscriptionContent,
+  footer,
+  ogImage
+}`;
 
 const postFields = /* groq */ `
   _id,
@@ -30,3 +37,5 @@ export const postQuery = groq`*[_type == "post" && slug.current == $slug] [0] {
 export const authorsQuery = groq`*[_type == "author"]{_id, name}`;
 
 export const userIsSubscribed = groq` * [_type == "subscriber" && email == $email][0]`;
+
+export const subscriptionDataQuery = groq`*[_type == "settings"][0]{subscription, subscriptionContent}`;
