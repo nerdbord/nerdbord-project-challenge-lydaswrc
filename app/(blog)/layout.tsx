@@ -11,7 +11,6 @@ import { Inter } from "next/font/google";
 import { draftMode } from "next/headers";
 import { Suspense } from "react";
 
-import AlertBanner from "./alert-banner";
 import PortableText from "./portable-text";
 
 import type { SettingsQueryResult } from "@/sanity.types";
@@ -20,6 +19,9 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { settingsQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import { SubscribeForm } from "./SubscribeForm";
+import { Container, Layout, Main, Section } from "@/components/craft";
+
+import { Header } from "./Header";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch<SettingsQueryResult>({
@@ -66,7 +68,7 @@ async function Footer() {
 
   return (
     <footer className="bg-accent-1 border-accent-2 border-t">
-      <div className="container mx-auto px-5">
+      <Container>
         {footer.length > 0 ? (
           <PortableText
             className="prose-sm text-pretty bottom-0 w-full max-w-none bg-white py-12 text-center md:py-20"
@@ -87,7 +89,7 @@ async function Footer() {
             </div>
           </div>
         )}
-      </div>
+      </Container>
     </footer>
   );
 }
@@ -98,19 +100,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} bg-white text-black`}>
-      <body>
-        <section className="min-h-screen">
-          {draftMode().isEnabled && <AlertBanner />}
-          <main>{children}</main>
-          <SubscribeForm />
-          <Suspense>
-            <Footer />
-          </Suspense>
-        </section>
-        {draftMode().isEnabled && <VisualEditing />}
-        <SpeedInsights />
-      </body>
-    </html>
+    <Layout>
+      <html lang="en" className={`${inter.variable} bg-white text-black`}>
+        <body>
+          <section className="min-h-screen px-5">
+            <Header />
+            <Main>{children}</Main>
+            <SubscribeForm />
+            <Suspense>
+              <Footer />
+            </Suspense>
+          </section>
+          {draftMode().isEnabled && <VisualEditing />}
+          <SpeedInsights />
+        </body>
+      </html>
+    </Layout>
   );
 }
