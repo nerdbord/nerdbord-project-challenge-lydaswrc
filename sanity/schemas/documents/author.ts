@@ -3,30 +3,30 @@ import { defineField, defineType } from "sanity";
 
 export default defineType({
   name: "author",
-  title: "Author",
+  title: "Autor",
   icon: UserIcon,
   type: "document",
   fields: [
     defineField({
       name: "name",
-      title: "Name",
+      title: "Imię i nazwisko",
       type: "string",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "picture",
-      title: "Picture",
+      title: "Zdjęcie",
       type: "image",
       fields: [
         {
           name: "alt",
           type: "string",
-          title: "Alternative text",
-          description: "Important for SEO and accessiblity.",
+          title: "Tekst alternatywny",
+          description: "Ważne dla SEO i dostępności.",
           validation: (rule) => {
             return rule.custom((alt, context) => {
               if ((context.document?.picture as any)?.asset?._ref && !alt) {
-                return "Required";
+                return "Wymagane";
               }
               return true;
             });

@@ -12,9 +12,11 @@ export default async function MoreStories(params: {
   skip: string;
   limit: number;
 }) {
+  const { skip, limit } = params;
+
   const data = await sanityFetch<MoreStoriesQueryResult>({
     query: moreStoriesQuery,
-    params,
+    params: { skip, limit },
   });
 
   return (

@@ -18,13 +18,13 @@ import authorType from "./author";
 
 export default defineType({
   name: "post",
-  title: "Post",
+  title: "Wpis",
   icon: DocumentTextIcon,
   type: "document",
   fields: [
     defineField({
       name: "title",
-      title: "Title",
+      title: "Tytuł",
       type: "string",
       validation: (rule) => rule.required(),
     }),
@@ -32,7 +32,7 @@ export default defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
-      description: "A slug is required for the post to show up in the preview",
+      description: "Slug jest wymagany, aby wpis był widoczny w podglądzie",
       options: {
         source: "title",
         maxLength: 96,
@@ -42,18 +42,18 @@ export default defineType({
     }),
     defineField({
       name: "content",
-      title: "Content",
+      title: "Treść",
       type: "array",
       of: [{ type: "block" }],
     }),
     defineField({
       name: "excerpt",
-      title: "Excerpt",
+      title: "Streszczenie",
       type: "text",
     }),
     defineField({
       name: "coverImage",
-      title: "Cover Image",
+      title: "Zdjęcie główne",
       type: "image",
       options: {
         hotspot: true,
@@ -65,12 +65,12 @@ export default defineType({
         {
           name: "alt",
           type: "string",
-          title: "Alternative text",
-          description: "Important for SEO and accessiblity.",
+          title: "Tekst alternatywny",
+          description: "Ważne dla SEO i dostępności.",
           validation: (rule) => {
             return rule.custom((alt, context) => {
               if ((context.document?.coverImage as any)?.asset?._ref && !alt) {
-                return "Required";
+                return "Wymagane";
               }
               return true;
             });
@@ -81,13 +81,13 @@ export default defineType({
     }),
     defineField({
       name: "date",
-      title: "Date",
+      title: "Data",
       type: "datetime",
       initialValue: () => new Date().toISOString(),
     }),
     defineField({
       name: "author",
-      title: "Author",
+      title: "Autor",
       type: "reference",
       to: [{ type: authorType.name }],
     }),
@@ -101,8 +101,8 @@ export default defineType({
     },
     prepare({ title, media, author, date }) {
       const subtitles = [
-        author && `by ${author}`,
-        date && `on ${format(parseISO(date), "LLL d, yyyy")}`,
+        author && `autor: ${author}`,
+        date && `dnia ${format(parseISO(date), "LLL d, yyyy")}`,
       ].filter(Boolean);
 
       return { title, media, subtitle: subtitles.join(" ") };

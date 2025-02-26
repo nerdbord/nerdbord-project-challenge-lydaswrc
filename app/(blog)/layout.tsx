@@ -103,7 +103,7 @@ export default function RootLayout({
         <section className="min-h-screen">
           {draftMode().isEnabled && <AlertBanner />}
           <main>{children}</main>
-          <SubscribeForm />
+          {/* <SubscribeForm /> */}
           <Suspense>
             <Footer />
           </Suspense>

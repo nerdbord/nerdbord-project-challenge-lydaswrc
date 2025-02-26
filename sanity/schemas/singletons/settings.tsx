@@ -5,14 +5,14 @@ import * as demo from "@/sanity/lib/demo";
 
 export default defineType({
   name: "settings",
-  title: "Settings",
+  title: "Ustawienia",
   type: "document",
   icon: CogIcon,
   fields: [
     defineField({
       name: "title",
-      description: "This field is the title of your blog.",
-      title: "Title",
+      description: "To pole jest tytułem Twojego bloga.",
+      title: "Tytuł",
       type: "string",
       initialValue: demo.title,
       validation: (rule) => rule.required(),
@@ -20,8 +20,8 @@ export default defineType({
     defineField({
       name: "description",
       description:
-        "Used both for the <meta> description tag for SEO, and the blog subheader.",
-      title: "Description",
+        "Używane zarówno dla tagu <meta> description dla SEO, jak i podtytułu bloga.",
+      title: "Opis",
       type: "array",
       initialValue: demo.description,
       of: [
@@ -53,8 +53,8 @@ export default defineType({
     defineField({
       name: "footer",
       description:
-        "This is a block of text that will be displayed at the bottom of the page.",
-      title: "Footer Info",
+        "To jest blok tekstu, który będzie wyświetlany na dole strony.",
+      title: "Informacje stopki",
       type: "array",
       of: [
         defineArrayMember({
@@ -80,9 +80,10 @@ export default defineType({
     }),
     defineField({
       name: "ogImage",
-      title: "Open Graph Image",
+      title: "Obraz Open Graph",
       type: "image",
-      description: "Displayed on social cards and search engine results.",
+      description:
+        "Wyświetlany na kartach społecznościowych i w wynikach wyszukiwania.",
       options: {
         hotspot: true,
         aiAssist: {
@@ -92,13 +93,13 @@ export default defineType({
       fields: [
         defineField({
           name: "alt",
-          description: "Important for accessibility and SEO.",
-          title: "Alternative text",
+          description: "Ważne dla dostępności i SEO.",
+          title: "Tekst alternatywny",
           type: "string",
           validation: (rule) => {
             return rule.custom((alt, context) => {
               if ((context.document?.ogImage as any)?.asset?._ref && !alt) {
-                return "Required";
+                return "Wymagane";
               }
               return true;
             });
@@ -112,7 +113,7 @@ export default defineType({
               href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase"
               rel="noreferrer noopener"
             >
-              More information
+              Więcej informacji
             </a>
           ),
         }),
@@ -122,7 +123,7 @@ export default defineType({
   preview: {
     prepare() {
       return {
-        title: "Settings",
+        title: "Ustawienia",
       };
     },
   },

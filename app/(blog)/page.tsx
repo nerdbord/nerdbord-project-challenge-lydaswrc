@@ -21,6 +21,10 @@ import {
   settingsQuery,
 } from "@/sanity/lib/queries";
 import { uploadAIBlogPost } from "./actions";
+import { GeneratePostButton } from "./generate-post-button";
+
+// Używamy ISR z krótkim czasem rewalidacji zamiast całkowitego wyłączenia cache
+export const revalidate = 10; // rewalidacja co 10 sekund
 
 function Intro(props: { title: string | null | undefined; description: any }) {
   const title = props.title || demo.title;
@@ -83,34 +87,29 @@ function HeroPost({
 }
 
 export default async function Page() {
+  // Dodajemy console.log, aby zobaczyć, kiedy strona jest renderowana
+  console.log("Renderowanie strony głównej:", new Date().toISOString());
+
   const [settings, heroPost, postTitles] = await Promise.all([
     sanityFetch<SettingsQueryResult>({
       query: settingsQuery,
     }),
-    sanityFetch<HeroQueryResult>({ query: heroQuery }),
-    sanityFetch<PostTitlesQueryResult>({ query: postTitlesQuery }),
+    sanityFetch<HeroQueryResult>({
+      query: heroQuery,
+    }),
+    sanityFetch<PostTitlesQueryResult>({
+      query: postTitlesQuery,
+    }),
   ]);
 
   console.log(
-    postTitles.map((post, index) => `${index + 1}. ${post.title}`).join(", ")
+    postTitles.map((post, index) => `${index + 1}. ${post.title}`).join(", "),
   );
   return (
     <div className="container mx-auto px-5">
       <Intro title={settings?.title} description={settings?.description} />
 
-      <form
-        action={async () => {
-          "use server";
-          uploadAIBlogPost();
-        }}
-      >
-        <button
-          className="bg-black text-white p-4 m-4 hover:bg-slate-800"
-          type="submit"
-        >
-          Generate random post!
-        </button>
-      </form>
+      <GeneratePostButton />
 
       {heroPost ? (
         <HeroPost

@@ -23,7 +23,7 @@ import settings from "@/sanity/schemas/singletons/settings";
 import { resolveHref } from "@/sanity/lib/utils";
 
 const homeLocation = {
-  title: "Home",
+  title: "Strona główna",
   href: "/",
 } satisfies DocumentLocation;
 
@@ -53,7 +53,7 @@ export default defineConfig({
         locations: {
           settings: defineLocations({
             locations: [homeLocation],
-            message: "This document is used on all pages",
+            message: "Ten dokument jest używany na wszystkich stronach",
             tone: "caution",
           }),
           post: defineLocations({
@@ -64,7 +64,7 @@ export default defineConfig({
             resolve: (doc) => ({
               locations: [
                 {
-                  title: doc?.title || "Untitled",
+                  title: doc?.title || "Bez tytułu",
                   href: resolveHref("post", doc?.slug)!,
                 },
                 homeLocation,
