@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Balancer from "react-wrap-balancer";
 
-import { Section, Container } from "@/components/craft";
+import { Section, Container, Article } from "@/components/craft";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -51,15 +51,15 @@ export const SubscribeForm = () => {
   };
 
   return (
-    <Section>
+    <Section className="px-1 md:px-7 lg:px-12 xl:px-15">
       <Container className="space-y-8">
-        <h2 className="!my-0 uppercase">Pozostańmy w kontakcie</h2>
+        <h2 className="!my-0">Stay in touch!</h2>
         <p className="text-lg opacity-70 md:text-2xl">
           <Balancer>
-            Jeśli uważasz, że nasze produkty wnoszą wartość do Twojego biznesu,
-            i chcesz być jednym z pierwszych klientów, którzy mają szansę
-            skorzystać z okazjonalnych promocji wpisz swój adres email -
-            skontaktujemy się z Tobą.
+            You are invited to share your email address to receive the latest
+            updates on life transformation, health, and wellness. We offer
+            various ways to improve your life and health, which can help you
+            achieve greater satisfaction and efficiency.
           </Balancer>
         </p>
         <Form {...form}>
@@ -84,7 +84,7 @@ export const SubscribeForm = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Subskrybuj</Button>
+            <Button type="submit">Subscribe</Button>
           </form>
         </Form>
       </Container>
